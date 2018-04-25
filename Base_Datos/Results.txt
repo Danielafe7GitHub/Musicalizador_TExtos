@@ -1,0 +1,363 @@
+Gospel:
+	Changme :
+		Pal positives:  8
+		Pal negatives:  0
+		Pal anger:  0
+		Pal fear:  5
+		Pal antici:  2
+		Pal trust:  7
+		Pal surprise:  3
+		Pal sadness:  0
+		Pal joy:  8
+		Pal dis:  0
+		Pal Total:  92
+
+
+	Everlasting:
+		Pal positives:  82
+		Pal negatives:  26
+		Pal anger:  7
+		Pal fear:  17
+		Pal antici:  54
+		Pal trust:  70
+		Pal surprise:  35
+		Pal sadness:  5
+		Pal joy:  60
+		Pal dis:  0
+		Pal Total:  511
+
+	i_Blessed:
+		Pal positives:  33
+		Pal negatives:  3
+		Pal anger:  2
+		Pal fear:  4
+		Pal antici:  5
+		Pal trust:  7
+		Pal surprise:  5
+		Pal sadness:  3
+		Pal joy:  32
+		Pal dis:  1
+		Pal Total:  302
+
+	wont_he_do:-----------------------------------------------------------------------?
+		Pal positives:  8
+		Pal negatives:  12
+		Pal anger:  8
+		Pal fear:  7
+		Pal antici:  9
+		Pal trust:  12
+		Pal surprise:  2
+		Pal sadness:  10
+		Pal joy:  4
+		Pal dis:  7
+		Pal Total:  359
+	
+	You _Waited:
+		Pal positives:  1
+		Pal negatives:  1
+		Pal anger:  0
+		Pal fear:  1
+		Pal antici:  0
+		Pal trust:  0
+		Pal surprise:  0
+		Pal sadness:  1
+		Pal joy:  0
+		Pal dis:  1
+		Pal Total:  101
+
+
+
+
+
+Speetch:
+	Mandela:
+		Pal positives:  121
+		Pal negatives:  64
+		Pal anger:  39
+		Pal fear:  52
+		Pal antici:  39
+		Pal trust:  74
+		Pal surprise:  11
+		Pal sadness:  42
+		Pal joy:  50
+		Pal dis:  13
+		Pal Total:  1079
+
+
+	Steve:
+		Pal positives:  85
+		Pal negatives:  54
+		Pal anger:  20
+		Pal fear:  38
+		Pal antici:  43
+		Pal trust:  60
+		Pal surprise:  27
+		Pal sadness:  38
+		Pal joy:  46
+		Pal dis:  22
+		Pal Total:  1644
+
+
+Storie:
+
+	bambie:
+		Pal positives:  52
+		Pal negatives:  34
+		Pal anger:  4
+		Pal fear:  14
+		Pal antici:  26
+		Pal trust:  31
+		Pal surprise:  11
+		Pal sadness:  23
+		Pal joy:  30
+		Pal dis:  1
+		Pal Total:  620
+
+	beauty:
+		Pal positives:  152
+		Pal negatives:  103
+		Pal anger:  44
+		Pal fear:  57
+		Pal antici:  92
+		Pal trust:  83
+		Pal surprise:  50
+		Pal sadness:  54
+		Pal joy:  91
+		Pal dis:  26
+		Pal Total:  2302
+
+	cinderella:
+		Pal positives:  95
+		Pal negatives:  49
+		Pal anger:  11
+		Pal fear:  19
+		Pal antici:  46
+		Pal trust:  43
+		Pal surprise:  27
+		Pal sadness:  22
+		Pal joy:  57
+		Pal dis:  15
+		Pal Total:  1575
+
+
+	hansel:-------------------------------------------------------?????
+		Pal positives:  74
+		Pal negatives:  75
+		Pal anger:  20
+		Pal fear:  33
+		Pal antici:  65
+		Pal trust:  54
+		Pal surprise:  26
+		Pal sadness:  38
+		Pal joy:  39
+		Pal dis:  22
+		Pal Total:  1856
+	Rumpelstiltskin:
+		Pal positives:  73
+		Pal negatives:  17
+		Pal anger:  7
+		Pal fear:  13
+		Pal antici:  31
+		Pal trust:  22
+		Pal surprise:  8
+		Pal sadness:  9
+		Pal joy:  37
+		Pal dis:  5
+		Pal Total:  767
+
+	Rapunzel:
+		Pal positives:  60
+		Pal negatives:  39
+		Pal anger:  17
+		Pal fear:  23
+		Pal antici:  33
+		Pal trust:  23
+		Pal surprise:  13
+		Pal sadness:  29
+		Pal joy:  36
+		Pal dis:  12
+		Pal Total:  874
+
+
+Pop:
+	Alessia:
+		Pal positives:  33
+		Pal negatives:  6
+		Pal anger:  1
+		Pal fear:  15
+		Pal antici:  9
+		Pal trust:  8
+		Pal surprise:  3
+		Pal sadness:  7
+		Pal joy:  28
+		Pal dis:  0
+		Pal Total:  259
+
+	Demi:
+		Pal positives:  19 ---------------------------------?
+		Pal negatives:  4
+		Pal anger:  4
+		Pal fear:  4
+		Pal antici:  3
+		Pal trust:  8
+		Pal surprise:  2
+		Pal sadness:  4
+		Pal joy:  15
+		Pal dis:  4
+		Pal Total:  288
+
+	Shanw:
+		Pal positives:  4---------------------------------------?
+		Pal negatives:  13
+		Pal anger:  3
+		Pal fear:  10
+		Pal antici:  3
+		Pal trust:  0
+		Pal surprise:  0
+		Pal sadness:  9
+		Pal joy:  4
+		Pal dis:  0
+		Pal Total:  247
+
+	Shape:
+		Pal positives:  67
+		Pal negatives:  11
+		Pal anger:  5
+		Pal fear:  2
+		Pal antici:  5
+		Pal trust:  8
+		Pal surprise:  3
+		Pal sadness:  5
+		Pal joy:  43
+		Pal dis:  6
+		Pal Total:  456
+
+	Stay.
+		Pal positives:  4 -----------------------------------------? Muy cortas....
+		Pal negatives:  2
+		Pal anger:  0
+		Pal fear:  2
+		Pal antici:  9
+		Pal trust:  2
+		Pal surprise:  2
+		Pal sadness:  0
+		Pal joy:  4
+		Pal dis:  0
+		Pal Total:  89
+
+	Bohemia:
+		Pal positives:  8
+		Pal negatives:  17
+		Pal anger:  6
+		Pal fear:  8
+		Pal antici:  7
+		Pal trust:  2
+		Pal surprise:  4
+		Pal sadness:  10
+		Pal joy:  3
+		Pal dis:  6
+		Pal Total:  292
+	Jude:
+		Pal positives:  3 ---------------------------------?
+		Pal negatives:  5
+		Pal anger:  2
+		Pal fear:  4
+		Pal antici:  2
+		Pal trust:  2
+		Pal surprise:  0
+		Pal sadness:  3
+		Pal joy:  1
+		Pal dis:  3
+		Pal Total:  148
+
+	Imagine:
+		Pal positives:  7
+		Pal negatives:  4
+		Pal anger:  2
+		Pal fear:  3
+		Pal antici:  3
+		Pal trust:  5
+		Pal surprise:  2
+		Pal sadness:  3
+		Pal joy:  3
+		Pal dis:  2
+		Pal Total:  104
+
+	Nirvana:
+
+		Pal positives:  7-------------------------------------------------------?
+		Pal negatives:  4
+		Pal anger:  2
+		Pal fear:  3
+		Pal antici:  3
+		Pal trust:  5
+		Pal surprise:  2
+		Pal sadness:  3
+		Pal joy:  3
+		Pal dis:  2
+		Pal Total:  104
+	
+	
+	I love Rock And Roll
+		Pal positives:  43
+		Pal negatives:  0
+		Pal anger:  0
+		Pal fear:  0
+		Pal antici:  9
+		Pal trust:  9
+		Pal surprise:  0
+		Pal sadness:  0
+		Pal joy:  29
+		Pal dis:  0
+		Pal Total:  278
+	
+	Dark: 
+		Pal positives:  468
+		Pal negatives:  515
+		Pal anger:  209
+		Pal fear:  319
+		Pal antici:  236
+		Pal trust:  266
+		Pal surprise:  154
+		Pal sadness:  291
+		Pal joy:  185
+		Pal dis:  142
+		Pal Total:  8140
+
+
+	Peder:
+		Pal positives:  1646
+		Pal negatives:  1508
+		Pal anger:  586
+		Pal fear:  721
+		Pal antici:  1003
+		Pal trust:  1061
+		Pal surprise:  469
+		Pal sadness:  799
+		Pal joy:  849
+		Pal dis:  420
+		Pal Total:  33261
+	
+	DarkCompleto:
+
+		Pal positives:  1512
+		Pal negatives:  1522
+		Pal anger:  615
+		Pal fear:  866
+		Pal antici:  768
+		Pal trust:  874
+		Pal surprise:  439
+		Pal sadness:  819
+		Pal joy:  559
+		Pal dis:  460
+		Pal Total:  27674
+
+
+Conclusion:
+Framework, no muy bueno para canciones.
+En disculsos, historias (mayor contenido) --> mejor resultado
+Sería interesante dividir c/texto por secciones, para saber dónde hay + -  y q emociones son mas predominantes.
+Dividir el textoes bueno si solo generas melodias para un cap....
+o es mejor no dividirlo ---> Dividirlo para entenderlo pero para gneral melodia ???.....
+considerar x ahora solo 6 basicas??'
+pero al dividirlo algnas secciones son parecidas en emocion... misma melodía??

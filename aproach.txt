@@ -1,0 +1,62 @@
+Densidad 
+
+
+Seccion1 	secccion2 	secc3	sec4
+ss1
+ss2 
+ss3
+ss4
+
+c/ssi es un bar/mesure ---------> 16 mesure para toda la novela...ver donde ilcuir repeticion
+para c/ssi densidad y complejidad..
+como consegir
+d y c para c/vbar
+
+La densidad General(suposiciones):
+A mas emocion + densidad
+la densida la ocnseguimos como la proporcion de 
+palab con emocion / pal sin emcion .... aplicarle sigmoidal apra que sea 0 y 1
+
+De aqui: sacar la pal con mas emocion / pal_con emoicn total y 0-1
+
+m3 = sgunda emo + predominante / pal_emocion total 0-1 
+
+La compjediad:
+Cuando hacer un ritmo complejo???
+Por ahora sera aleatorio ....
+
+
+En nuestro caso tendremos para probrar 3 secciones
+c/seccion compuesta por 4 mesures.
+los 4 por seccion trabajan con la misma densidad y con complejidad aleatoria
+
+
+Ladron de bici:
+Seccion1:
+Overall: 
+47/847
+
+
+S1   -> 47
+s2   -> 137
+s3   -> 134
+
+
+
+
+s2 mayor emocion : 
+
+
+e1 p/subseccion: ? de ellas cual tiene mas densidad?
+25 de 192  = 0.28  ->>> d [0.8-1]
+37 DE 206  = 0.18  ->>> d [0.5-7]
+34 DE 87   = 0.1771 ->>> d [0.-0.4]
+
+
+Aplicando el mismo aproach 
+M2:
+
+15 de 192  0,078125
+32 de 206  0,155339806
+29 de 87   0.34
+
