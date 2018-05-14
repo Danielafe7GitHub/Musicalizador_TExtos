@@ -8,6 +8,8 @@ nota_negra = [0.25,0.25,0.25,0.25 ]
 nota_octava = [0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125]
 nota_dieciseis = [0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625]
 
+do_mayor_escala = [0,1,2,3,4,5,6]       #C D E  F G A  B    #0
+do_menor_escala = [0,1,2,3,4,5,6]       #C D Eb F G Ab Bb   #1 
 domayor_escala = ["C","D","E","F","G","A","B"] 
 dominor_escala = ["C","D","Eb","F","G","Ab","Bb"] 
 grado_acorde = ["I", "II", "III", "IV", "V", "VI", "VII"]
@@ -40,9 +42,10 @@ def selector_tempo(emo_act,emo_pass):
 
 #Selección de Octavas Para las 3 melodías
 def selector_octavas(pal_alegr,pal_trist,e1,e2):
-    js_max = 0.017
-    js_min = -0.002
+    js_max = 200
+    js_min = 10
     js = pal_alegr - pal_trist
+
     _octava  = 4 + round((js - js_min)*(6-4)/(js_max - js_min))
 
     if e1 == "joy" or e1 == "trust":
@@ -66,35 +69,44 @@ def selector_octavas(pal_alegr,pal_trist,e1,e2):
 #Devuelve una lista del numero de notas que tiene c/seccion Ejemo oe_list = 2 4 1 1 --> 2 notas para secc1 4 notas secc 2 ... so on
 def patron_ritmo(min,max,densidad):
     rhythm_pattern = []
-    desplazamiento = (min+max) / 5
-    for seccion_densidad in densidad:
+    desplazamiento = (max - min) / 5
+
+    for seccion_densidad in densidad: #4 densidades, 1 por sección
+        flag = 0
         tmp1 = min
         tmp2 = min + desplazamiento
-
-        if seccion_densidad >= tmp1 and seccion_densidad < tmp2:
+        if flag != 1 and seccion_densidad >= tmp1 and seccion_densidad < tmp2:
             rhythm_pattern.append(1) #La seccion 1 se toca en una única nota blanca
-        tmp1 = tmp2 + desplazamiento
-        elif seccion_densidad >= tmp2 and seccion_densidad < tmp1:
+            flag = 1
+        else:
+            tmp1 = tmp2 + desplazamiento
+        if flag != 1 and seccion_densidad >= tmp2 and seccion_densidad < tmp1:
             rhythm_pattern.append(2)
-        tmp2 = tmp1 + desplazamiento
-        elif seccion_densidad >= tmp1 and seccion_densidad < tmp2:
+            flag = 1
+        else:
+            tmp2 = tmp1 + desplazamiento
+        if flag != 1 and seccion_densidad >= tmp1 and seccion_densidad < tmp2:
             rhythm_pattern.append(3)
-        tmp1 = tmp2 + desplazamiento
-        elif seccion_densidad >= tmp2 and seccion_densidad < tmp1:
+            flag = 1
+        else:
+            tmp1 = tmp2 + desplazamiento
+        if flag != 1 and seccion_densidad >= tmp2 and seccion_densidad < tmp1:
             rhythm_pattern.append(4)
-        tmp2 = tmp1 + desplazamiento
-        elif seccion_densidad >= tmp1 and seccion_densidad <= tmp2:
+            flag = 1
+        else:
+            tmp2 = tmp1 + desplazamiento
+        if flag != 1 and seccion_densidad >= tmp1 and seccion_densidad <= max: #No 100 el des encaja
             rhythm_pattern.append(5)
-        else: 
-            print("Error al asignar duracion values ")
+            flag = 1
 
     return rhythm_pattern
 
 #Asigna los valores de c/ ritmo Ejemo oe_list = 2 4 1 1 --> [0.5 0.5 ] [0.25 0.25 0.25 0.25 ] ... so on
 def ritmo_value(patron_de_ritmo):
     ritmo_secciones = []
-    ritmo_pat = []
+
     for seccion in patron_de_ritmo:
+        ritmo_pat = []
         if seccion == 1:
             ritmo_pat = nota_blanca
         elif seccion == 2:
@@ -106,8 +118,8 @@ def ritmo_value(patron_de_ritmo):
         else:
             ritmo_pat = nota_dieciseis
         ritmo_secciones.append(ritmo_pat)
-        ritmo_pat.clear()
 
+    return ritmo_secciones
 #Generación de Melodías (Mo,Me1,Me2)
 
 #Modulo Armonía (Se elige una anota aleatoria y se va iterando la matriz)
@@ -131,6 +143,8 @@ def selector_acorde(escala):
 
 #Modulo Melodia (Ponerle notas al ritmo)
 def selector_nota(_acorde,_patron_ritmo,_escala,_pitch_contour):
+    #print("patron_ritmo ",_patron_ritmo)
+    nota_octave = 0.125 
     if _escala == 0:
         escala = do_mayor_escala
     else:
@@ -141,7 +155,7 @@ def selector_nota(_acorde,_patron_ritmo,_escala,_pitch_contour):
         if nota == 0 or nota == len(_melodia) -1:
             _n = random.randint(0,2)   
             _melodia[nota] = _acorde[_n]
-        elif nota > nota_octava:
+        elif nota > nota_octave:
             _n = random.randint(0,2)   
             _melodia[nota] = _acorde[_n]
         else:
@@ -149,7 +163,7 @@ def selector_nota(_acorde,_patron_ritmo,_escala,_pitch_contour):
                 _melodia[nota] = escala[escala.index(_melodia[nota-1] + 1)]
             else: #descendente
                 _melodia[nota] = escala[escala.index(_melodia[nota-1] - 1)]
-
+    #print("melodia ",_melodia)
     return _melodia
 
 
@@ -169,13 +183,74 @@ def generator_ritmo(oe_list,e1_list,e2_list):
 
 
     min_e2 = min(e2_list)
-    max_e2 = miax(e2_list)
+    max_e2 = max(e2_list)
     ritmo_e2 = patron_ritmo(min_e2,max_e2,e2_list)
     ritmos_e2 = ritmo_value(ritmo_e2)
+
+    print(ritmo_oe)
+    print(ritmo_e1)
+    print(ritmo_e2)
 
     return (ritmos_oe,ritmos_e1,ritmos_e2)
     #La desventaja de esta prueba es: que habrá para c/sec puras notas blancas o negras etc. pero es solo na prueba y es posible
     #que se se solucion con 3 melodias al mismo tiemo
+    
+
+#Conversion de Melodia en Notas
+def conversion_melodia(_escala,_melodia):
+    _patron_melodia = []
+    if _escala == 0: #Escala Cmajor
+        for _nota in range (0,len(_melodia)):
+            _posicion = _melodia[_nota]
+            _patron_melodia.append(domayor_escala[_posicion])
+    else:
+        for _nota in range (0,len(_melodia)):
+            _posicion = _melodia[_nota]
+            _patron_melodia.append(dominor_escala[_posicion])
+
+    return _patron_melodia
+
+#Conversion de Acordes en Notas
+def conversion_acordes(_escala,_acorde):
+    _chords = ""
+    if _escala == 0:
+        for a in range(0,len(_acorde)):
+            _chords += domayor_escala[_acorde[a]] 
+            if a != len(acorde) - 1:
+                _chords += "w+"
+    else: 
+        for a in range(0,len(_acorde)):
+            _chords += dominor_escala[_acorde[a]]
+            if a != len(acorde) - 1:
+                _chords += "w+"
+    _chords += "w"
+    return _chords
+
+#Poniendo todo Junto para general un patrón musical
+def output(_escala,_tempo,_octava,_melodia,_ritmo,_voz,_acorde):
+    voz_melodia = ""
+    _measure = " "
+    _chords = " "
+    if escala == 0:
+        voz_melodia += "KCmaj "
+    else: 
+        voz_melodia += "KCmin "
+
+    _voz = "V"+str(_voz) + " "
+    voz_melodia += _voz
+    voz_melodia += "T" + str(_tempo) + " "
+    _chords += voz_melodia
+
+    for melodia,ritmo in zip(_melodia,_ritmo):
+        for nota,tiempo in zip(melodia,ritmo):
+            _measure += nota + str(_octava)+"/" + str(tiempo) + "   "
+            _chords += _acorde + "   "
+        
+
+
+    print(voz_melodia + _measure)
+    print(_chords)
+
     
 
 #Emociones de la novela entera
@@ -199,10 +274,11 @@ e1 = "anticipation"
 e2 = "trust"
 
 escala = selector_escala(pal_positivas,pal_negativas)
+acorde = selector_acorde(escala)
 tempo = selector_tempo(activas,pasivas)
 o1,o2,o3 = selector_octavas(joy,sadness,e1,e2)
-_pitch_contour = escala
 
+_pitch_contour = escala
 
 #Overall Emotion ,e1, e2 (4 secciones)
 oe_list = [0.24028738690792975,0.24248145650708025,0.24715110256030784,0.28514299563742124]
@@ -213,13 +289,39 @@ melodias_oe = []
 melodias_e1 = []
 melodias_e2 = []
 
+melodias_oe_notas = []
+melodias_e1_notas = []
+melodias_e2_notas = []
+
 ritmos_oe,ritmos_e1,ritmos_e2 = generator_ritmo(oe_list,e1_list,e2_list)
+
 for ritmo in ritmos_oe:
     melodias_oe.append(selector_nota(acorde,ritmo,escala,_pitch_contour))
 
 for ritmo in ritmos_e1:
-    melodias_oe.append(selector_nota(acorde,ritmo,escala,_pitch_contour))
+    melodias_e1.append(selector_nota(acorde,ritmo,escala,_pitch_contour))
 
 for ritmo in ritmos_e2:
-    melodias_oe.append(selector_nota(acorde,ritmo,escala,_pitch_contour))
+    melodias_e2.append(selector_nota(acorde,ritmo,escala,_pitch_contour))
 
+for melodia in melodias_oe:
+    melodia = conversion_melodia(escala,melodia)
+    melodias_oe_notas.append(melodia)
+
+
+for melodia in melodias_e1:
+    melodia = conversion_melodia(escala,melodia)
+    melodias_e1_notas.append(melodia)
+
+
+for melodia in melodias_e2:
+    melodia = conversion_melodia(escala,melodia)
+    melodias_e2_notas.append(melodia)
+
+
+acorde_nota = conversion_acordes(escala,acorde)
+print(acorde_nota)
+
+output(escala,tempo,o1,melodias_oe_notas,ritmos_oe,0,acorde_nota)
+output(escala,tempo,o2,melodias_e1_notas,ritmos_e1,1,acorde_nota)
+output(escala,tempo,o3,melodias_e2_notas,ritmos_e2,2,acorde_nota)
