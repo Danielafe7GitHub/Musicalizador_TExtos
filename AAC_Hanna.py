@@ -8,6 +8,12 @@ nota_negra = [0.25,0.25,0.25,0.25 ]
 nota_octava = [0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125]
 nota_dieciseis = [0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625]
 
+blanca_duracion = 1
+media_duracion = 0.5
+negra_duracion = 0.25
+octava_duracion = 0.125
+dieciseis_duracion = 0.0625
+
 do_mayor_escala = [0,1,2,3,4,5,6]       #C D E  F G A  B    #0
 do_menor_escala = [0,1,2,3,4,5,6]       #C D Eb F G Ab Bb   #1 
 domayor_escala = ["C","D","E","F","G","A","B"] 
@@ -33,18 +39,18 @@ def selector_escala(pal_positivas,pal_negativas):
         return 1
 
 #Selección Tempo 40bmp -180bpm
-def selector_tempo(emo_act,emo_pass):
-    act_max = 0.017
+def selector_tempo(emo_act,emo_pass,pal_total):
+    act_max = 0.010
     act_min = -0.002
-    act = emo_act - emo_pass
+    act = (emo_act-emo_pass) / pal_total
     _tempo = 40 + (((act - act_min) * (180-40)) / (act_max - act_min))
     return round(_tempo)
 
 #Selección de Octavas Para las 3 melodías
-def selector_octavas(pal_alegr,pal_trist,e1,e2):
-    js_max = 200
-    js_min = 10
-    js = pal_alegr - pal_trist
+def selector_octavas(pal_alegr,pal_trist,e1,e2,pal_total):
+    js_max = 0.0080
+    js_min = -0.0080
+    js = (pal_alegr - pal_trist) / pal_total
 
     _octava  = 4 + round((js - js_min)*(6-4)/(js_max - js_min))
 
@@ -101,22 +107,67 @@ def patron_ritmo(min,max,densidad):
 
     return rhythm_pattern
 
+#Random ritmo value:
+def random_selector(num_notas,time_signature):
+    values_list = []
+    patron = []
+    value_total = 0
+    if num_notas == 1:
+        values_list.append(blanca_duracion)
+    elif num_notas == 2:
+        values_list.append(blanca_duracion)
+        values_list.append(media_duracion)
+    elif num_notas == 3:
+        values_list.append(media_duracion)
+        values_list.append(negra_duracion)
+    elif num_notas == 4:
+        values_list.append(negra_duracion)
+        values_list.append(octava_duracion)
+
+    elif num_notas == 5:
+         values_list.append(octava_duracion)
+         values_list.append(dieciseis_duracion)
+
+    random.shuffle(values_list)
+    while value_total < time_signature:
+        _r = random.randint(0, len(values_list)-1)
+        value_total += values_list[_r]
+        patron.append(values_list[_r])    
+
+    if value_total < 1:
+        resto = time_signature - value_total
+        patron.append(resto)
+    elif value_total > 1:
+        resto = value_total - time_signature
+        patron.remove(resto)
+
+    #Verifica 
+    assert (np.sum(patron) == 1)
+    return patron
+        
+
+
 #Asigna los valores de c/ ritmo Ejemo oe_list = 2 4 1 1 --> [0.5 0.5 ] [0.25 0.25 0.25 0.25 ] ... so on
 def ritmo_value(patron_de_ritmo):
     ritmo_secciones = []
-
+    time_signature = 1
     for seccion in patron_de_ritmo:
         ritmo_pat = []
         if seccion == 1:
-            ritmo_pat = nota_blanca
+            #ritmo_pat = nota_blanca
+            ritmo_pat = random_selector(seccion,time_signature)
         elif seccion == 2:
-            ritmo_pat = nota_media
+            #ritmo_pat = nota_media
+            ritmo_pat = random_selector(seccion,time_signature)
         elif seccion == 3:
-            ritmo_pat = nota_negra
+            #ritmo_pat = nota_negra
+            ritmo_pat = random_selector(seccion,time_signature)
         elif seccion == 4:
-            ritmo_pat = nota_octava
+            #ritmo_pat = nota_octava
+            ritmo_pat = random_selector(seccion,time_signature)
         else:
-            ritmo_pat = nota_dieciseis
+            #ritmo_pat = nota_dieciseis
+            ritmo_pat = random_selector(seccion,time_signature)
         ritmo_secciones.append(ritmo_pat)
 
     return ritmo_secciones
@@ -248,42 +299,63 @@ def output(_escala,_tempo,_octava,_melodia,_ritmo,_voz,_acorde):
         
 
 
-    print(voz_melodia + _measure)
-    print(_chords)
+    #print(voz_melodia + _measure)
+    #print(_chords)
 
     
+def values(e1,e2,o0,oe1,oe2,tempo,pos,neg,escala,joy,sad,act,pas,total):
+    print("e1: ",e1)
+    print("e2: ",e2)
+    print("oo: ",o0)
+    print("tempo: ",tempo)
+    if pos>neg:
+        print("Pos/Neg: Positive")
+    else:
+        print("Negative")
+    print("escala: ",escala)
+    print("activity: ",(act-pas) / total)
+    print("joy/sad: ",joy/total - sad/total)
 
-#Emociones de la novela entera
-anger =  585
-fear =  728
-surprise =  445
-sadness =  743
-joy =  776
-dis = 412
-antici =  925
-trust =  920
 
-#Init
-pal_positivas = 1473
-pal_negativas = 1435
-pal_total = 29940
-pal_total_emo = 7627
-activas = (joy + anger) / pal_total #Nota / pal_total
-pasivas = sadness / pal_total
-e1 = "anticipation"
-e2 = "trust"
+
+#Emociones de la novela entera: dark
+anger =  651
+fear =  911
+surprise =  462
+sadness =  868
+joy =  569
+dis =  491
+antici =  801
+trust =  851
+pal_positivas =  1527
+pal_negativas =  1617
+pal_total =  45933
+pal_total_emo =  8560
+
+
+
+e1 = "fear"
+e2 = "sadness"
+activas = (joy + anger) 
+pasivas = sadness 
 
 escala = selector_escala(pal_positivas,pal_negativas)
 acorde = selector_acorde(escala)
-tempo = selector_tempo(activas,pasivas)
-o1,o2,o3 = selector_octavas(joy,sadness,e1,e2)
+tempo = selector_tempo(activas,pasivas,pal_total)
+o1,o2,o3 = selector_octavas(joy,sadness,e1,e2,pal_total)
 
 _pitch_contour = escala
 
+
+values(e1,e2,o1,o2,o3,tempo,pal_positivas,pal_negativas,escala,joy,sadness,activas,pasivas,pal_total)
+
 #Overall Emotion ,e1, e2 (4 secciones)
-oe_list = [0.24028738690792975,0.24248145650708025,0.24715110256030784,0.28514299563742124]
-e1_list = [0.03139968068121341,0.029534726904922454,0.03270682255438804,0.03562772661173049]
-e2_list = [0.03100053219797765,0.023465947403910992,0.031818854521237235,0.0340523509452254]
+oe_list = [0.19130732375085557,0.18229680816057914 ,0.20472714633298575 ,0.19592696629213482 ,0.16815522020326454 , 0.18695941450432468 ,0.19887491727332893 ,0.19060225016545335 ,0.19586580820060998 ,0.17872918790349984 , 0.15064848686398405 ,0.1992729676140119 ,0.17697314890154597 ,0.19060665362035226 ,0.20577485380116958 ,0.1627088830255057]
+e1_list = [0.018480492813141684,0.02435011516946364 ,0.026068821689259645 ,0.02247191011235955 ,0.018786572220511243 ,0.020292747837658016 ,0.02183984116479153 ,0.021178027796161483 ,0.021009827177228057 ,0.022426095820591234 ,0.014965081476554705 ,0.021480502313284865 , 0.022782750203417412 ,0.026223091976516635 ,0.025950292397660817 ,0.0316622691292876]
+e2_list = [0.01642710472279261,0.02040144784468575 , 0.022940563086548488 ,0.018960674157303372 ,0.017862642439174622 ,0.015968063872255488 ,0.01985440105890139 ,0.020516214427531435 , 0.018298881735005084 , 0.021746517159361198 ,0.014632524110409046 ,0.020819563780568408 ,0.022782750203417412 , 0.02309197651663405 , 0.02448830409356725 , 0.020228671943711522 ]
+print(len(oe_list))
+print(len(e1_list))
+print(len(e2_list))
 
 melodias_oe = []
 melodias_e1 = []
